@@ -322,25 +322,25 @@ telemetry:
     
 
 metric_store:
-  mongodb:
-    uri: mongodb://mongodb:27017
-    collection: metrics
+  # mongodb:
+    # uri: mongodb://mongodb:27017
+    # collection: metrics
 
 request_store:
-  mongodb:
-    uri: mongodb://mongodb:27017
-    collection: requests
+  # mongodb:
+    # uri: mongodb://mongodb:27017
+    # collection: requests
 
 caching:
-  mongodb:
-    uri: mongodb://mongodb:27017
-    collection: cache
+  # mongodb:
+    # uri: mongodb://mongodb:27017
+    # collection: cache
 
 queue:
-  rabbitmq:
-    host: rabbitmq
-    port: 5672
-    name: default
+  # rabbitmq:
+    # host: rabbitmq
+    # port: 5672
+    # name: default
 
 worker:
   host: worker
