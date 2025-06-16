@@ -364,14 +364,14 @@ testrunner:
   port: 5000
 
 staging:
-  s3_boto3:
-    access_key: *s3_access_key
-    buffer_size: 10971520
-    host: *download_host
-    max_threads: 10
-    port: *download_port
-    secret_key: *s3_secret_key
-    use_ssl: true
+  #s3_boto3:
+    #access_key: *s3_access_key
+    #buffer_size: 10971520
+    #host: *download_host
+    #max_threads: 10
+    #port: *download_port
+    #secret_key: *s3_secret_key
+    #use_ssl: true
 
 garbage-collector:
   interval: 10s
