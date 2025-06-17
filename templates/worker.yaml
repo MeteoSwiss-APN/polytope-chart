@@ -83,6 +83,17 @@ spec:
             value: {{ .Values.logging.mars_debug | quote | default "0" }}
           - name: FDB_DEBUG
             value: {{ .Values.logging.fdb_debug | quote | default "0" }}
+          {{- if .Values.deployment.default.extraEnvironmentVars }}
+          {{- range $key, $value := .Values.deployment.default.extraEnvironmentVars }}
+          - name: {{ $key }}
+          {{- if kindIs "string" $value }}
+            value: {{ $value | quote }}
+          {{- else }}
+            valueFrom:
+              {{ toYaml $value | nindent 14 | trim }}
+          {{- end -}}
+          {{- end }}
+          {{- end }}
         volumeMounts:
           - name: config-volume
             mountPath: /etc/polytope
@@ -131,8 +142,10 @@ spec:
         {{ end }}
       securityContext:
         fsGroup: 1500
+      {{ if .Values.deployment.imageCredentials }}
       imagePullSecrets:
         - name: polytope-registry-cred
+      {{ end }}
   {{ if .Values.deployment.worker_node }}
   affinity:
     nodeAffinity:
@@ -349,6 +362,7 @@ spec:
 # Service account rules give the mars-wrapper the ability to do "get" on the "services" endpoint,
 # allowing it to query the assigned nodeport
 
+{{ if .Values.deployment.mars_c.enabled }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -372,8 +386,7 @@ roleRef:
   kind: Role
   name: mars-client
   apiGroup: rbac.authorization.k8s.io
-
-
+{{ end }}
 
 
 {{ end }}
