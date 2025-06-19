@@ -249,10 +249,10 @@ deployment:
       annotations:
         # list all frontend ingress annotations
     telemetry:
-      annotations:
-        # list all telemetry ingress annotations
       enabled: false
       tls_secret: # deployment specific
+      annotations:
+        # list all telemetry ingress annotations
       
   broker:
     replicas: 1
